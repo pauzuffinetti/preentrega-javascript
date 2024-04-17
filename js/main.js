@@ -7,7 +7,7 @@ function generarNumeroAleatorio(min, max) {
     let intentos = 0;
     let intentoUsuario;
   
-    alert("Bienvenido al juego de adivinanza. Adiviná un número entre 1 y 100.");
+    alert("Welcome to the jueguito. Adiviná un número entre 1 y 100");
   
     do {
       intentoUsuario = parseInt(prompt("Introducí un número:"));
@@ -18,11 +18,11 @@ function generarNumeroAleatorio(min, max) {
         intentos++;
   
         if (intentoUsuario < numeroAleatorio) {
-          alert("El número es mayor. Intenta de nuevo.");
+          alert("El número es mayor. A vos te parece? Probá de nuevo, dale");
         } else if (intentoUsuario > numeroAleatorio) {
-          alert("El número es menor. Intenta de nuevo.");
+          alert("El número es menor. No me hagas enojar.");
         } else {
-          alert(`Genio, crack! Adivinaste el número en ${intentos} intentos. La próxima esforzate un poquito más.`);
+          alert(`¡Genio, crack! Adivinaste el número en ${intentos} intentos. La próxima esforzate un poquito más.`);
         }
       }
     } while (intentoUsuario !== numeroAleatorio);
