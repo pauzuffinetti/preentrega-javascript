@@ -18,11 +18,11 @@ function generarNumeroAleatorio(min, max) {
         intentos++;
   
         if (intentoUsuario < numeroAleatorio) {
-          alert("El número es mayor. A vos te parece? Probá de nuevo, dale");
+          alert("El número es mayor. Probá de nuevo por dios");
         } else if (intentoUsuario > numeroAleatorio) {
-          alert("El número es menor. No me hagas enojar.");
+          alert("El número es menor. No me hagas calentar.");
         } else {
-          alert(`¡Genio, crack! Adivinaste el número en ${intentos} intentos. La próxima esforzate un poquito más.`);
+          alert(`¡Genio, crack, máquina! Adivinaste el número en ${intentos} intentos. La próxima esforzate un poquito más.`);
         }
       }
     } while (intentoUsuario !== numeroAleatorio);
