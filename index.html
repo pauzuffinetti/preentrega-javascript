@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preentrega 2</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="main.css">
+  <title>Juego de adivinanzas</title>
 </head>
 <body>
-    <script src="js/main.js"></script>
+  <section>
+    <h1>Juego de Adivinanzas</h1>
+    
+    <div id="game-container">
+      <p>Introduce un número entre 1 y 100:</p>
+      <input type="number" id="user-input" />
+      <button id="guess-button" disabled>Adivinar</button>
+      <p id="message"></p>
+      <p id="attempts"></p>
+    </div>
+  </section>
+  <script src="/js/main.js"></script>
 </body>
 </html>

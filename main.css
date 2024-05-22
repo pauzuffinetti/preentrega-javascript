@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10%;
+    text-align: center;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+#game-container {
+    margin: 20px;
+}
+
+#guess-button {
+    margin: 15px 0;
+}
