@@ -38,27 +38,47 @@ class JuegoAdivinanza {
     guessButton.disabled = userInput.value === '';
   }
 
-  jugar() {
+  async jugar() {
     const userInput = document.getElementById('user-input');
-    const message = document.getElementById('message');
     const attempts = document.getElementById('attempts');
     const guessButton = document.getElementById('guess-button');
 
     let intentoUsuario = parseInt(userInput.value);
 
     if (isNaN(intentoUsuario) || intentoUsuario < 1 || intentoUsuario > 100) {
-      message.textContent = "Por favor, ingresa un número válido entre 1 y 100.";
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Por favor, ingresa un número válido entre 1 y 100.'
+      });
     } else {
       this.intentos.push(intentoUsuario);
       this.guardarDatos();
+      try {
+        await this.registrarIntento(intentoUsuario);
+      } catch (error) {
+        console.error('Error registrando el intento:', error);
+      }
       attempts.textContent = `Intentos: ${this.intentos.join(', ')}`;
 
       if (intentoUsuario < this.numeroAleatorio) {
-        message.textContent = "El número es mayor. Probá de nuevo por dios";
+        Swal.fire({
+          icon: 'info',
+          title: 'Inténtalo de nuevo',
+          text: 'El número es mayor. Probá de nuevo.'
+        });
       } else if (intentoUsuario > this.numeroAleatorio) {
-        message.textContent = "El número es menor. No me hagas enojar.";
+        Swal.fire({
+          icon: 'info',
+          title: 'Inténtalo de nuevo',
+          text: 'El número es menor. No me hagas enojar.'
+        });
       } else {
-        message.textContent = `¡Genio, crack, máquina! Adivinaste el número en ${this.intentos.length} intentos. La próxima esforzate un poquito más.`;
+        Swal.fire({
+          icon: 'success',
+          title: '¡Felicidades!',
+          text: `¡Genio, crack, máquina! Adivinaste el número en ${this.intentos.length} intentos. La próxima esforzate un poquito más.`
+        });
         guessButton.disabled = true;
         userInput.disabled = true;
         this.limpiarJuego();
@@ -67,6 +87,36 @@ class JuegoAdivinanza {
 
     userInput.value = '';
     this.habilitarBoton(); 
+  }
+
+  registrarIntento(intento) {
+    return new Promise((resolve, reject) => {
+      fetch('https://api.example.com/registrar-intento', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          intento: intento,
+          numeroAleatorio: this.numeroAleatorio,
+          intentos: this.intentos
+        })
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error en la solicitud');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Intento registrado:', data);
+        resolve(data);
+      })
+      .catch(error => {
+        console.error('Hubo un problema con la solicitud fetch:', error);
+        reject(error);
+      });
+    });
   }
 
   guardarDatos() {
